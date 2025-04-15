@@ -2,7 +2,7 @@ import { Api } from './components/base/api';
 import { eventEmitter, Events } from './components/base/events';
 import { BasketModel } from './components/model/BasketModel';
 import { BasketView } from './components/view/basketView';
-import { productsGalleryModel } from './components/model/productsGalleryModel';
+import { ProductsGalleryModel } from './components/model/ProductsGalleryModel';
 import { ProductGalleryView } from './components/view/ProductGalleryView';
 import { Modal } from './components/view/modalView';
 import './scss/styles.scss';
@@ -13,6 +13,7 @@ import { ContactsView } from './components/view/ContactsView';
 import { OrderSuccessView } from './components/view/OrderSuccessView';
 import { BasketController } from './components/controller/BasketController';
 import { OrderController } from './components/controller/OrderController';
+import { API_URL } from './utils/constants';
 
 
 const events = new eventEmitter();
@@ -23,7 +24,7 @@ const basketView = new BasketView(events);
 new BasketController(basketView, basketModel, events, modal);
 
 const productGalleryView = new ProductGalleryView(document.querySelector('.gallery'), modal, events);
-const catalogModel = new productsGalleryModel();
+const catalogModel = new ProductsGalleryModel();
 
 const ordModel = new OrderModel(events, basketModel);
 const orderView = new OrderView(events, modal);
@@ -31,7 +32,7 @@ const contactsView = new ContactsView(events, modal)
 new OrderController(orderView, basketModel, contactsView, ordModel, events, modal);
 new OrderSuccessView(events, modal);
 
-export const api = new Api('https://larek-api.nomoreparties.co/api/weblarek');
+export const api = new Api(API_URL);
 
 api
 	.get('/product/')

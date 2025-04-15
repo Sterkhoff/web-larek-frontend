@@ -1,6 +1,6 @@
 import { ICatalog, IProduct } from '../../types';
 
-export class productsGalleryModel implements ICatalog {
+export class ProductsGalleryModel implements ICatalog {
 	items: IProduct[] = [];
 
 	setItems(items: IProduct[]): void {

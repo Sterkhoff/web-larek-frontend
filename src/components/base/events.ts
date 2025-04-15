@@ -20,7 +20,6 @@ export enum Events {
 export interface IEvents {
     on<T extends object>(event: EventName, callback: (data: T) => void): void;
     emit<T extends object>(event: string, data?: T): void;
-    trigger<T extends object>(event: string, context?: Partial<T>): (data: T) => void;
 }
 
 export class eventEmitter implements IEvents {
@@ -43,15 +42,6 @@ export class eventEmitter implements IEvents {
                 subscribers.forEach(callback => callback(data));
             }
         });
-    }
-
-    trigger<T extends object>(eventName: string, context?: Partial<T>) {
-        return (event: object = {}) => {
-            this.emit(eventName, {
-                ...(event || {}),
-                ...(context || {})
-            });
-        };
     }
 }
 
